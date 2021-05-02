@@ -16,7 +16,7 @@ services:
     restart: always
 
   proxy:
-    image: lightshield/proxy:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/proxy:${TAG}
     networks:
       default:
         aliases:
