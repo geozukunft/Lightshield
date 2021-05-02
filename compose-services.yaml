@@ -6,7 +6,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: services/base
-    image: lightshield/base_image:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/base_image:${TAG}
     entrypoint: [ 'ls' ]
 
   league_ranking:
@@ -16,7 +16,7 @@ services:
       context: services/league_ranking
       args:
         TAG: ${TAG}
-    image: lightshield/league_ranking:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/league_ranking:${TAG}
     environment:
       - SERVER=${SERVER}
       - UPDATE_INTERVAL=1
@@ -34,7 +34,7 @@ services:
       context: services/summoner_id_manager
       args:
         TAG: ${TAG}
-    image: lightshield/summoner_id_manager:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/summoner_id_manager:${TAG}
     environment:
       - SERVER=${SERVER}
     env_file:
@@ -47,7 +47,7 @@ services:
       context: services/summoner_id
       args:
         TAG: ${TAG}
-    image: lightshield/summoner_id:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/summoner_id:${TAG}
     environment:
       - SERVER=${SERVER}
     env_file:
@@ -64,7 +64,7 @@ services:
       context: services/match_history_manager
       args:
         TAG: ${TAG}
-    image: lightshield/match_history_manager:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/match_history_manager:${TAG}
     env_file:
       - secrets.env
 
@@ -75,7 +75,7 @@ services:
       context: services/match_history
       args:
         TAG: ${TAG}
-    image: lightshield/match_history:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/match_history:${TAG}
     environment:
       - SERVER=${SERVER}
       - QUEUES=420
@@ -90,7 +90,7 @@ services:
       context: services/match_details_manager
       args:
         TAG: ${TAG}
-    image: lightshield/match_details_manager:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/match_details_manager:${TAG}
     environment:
       - LIMIT=5000
       - SERVER=${SERVER}
@@ -104,7 +104,7 @@ services:
       context: services/match_details
       args:
         TAG: ${TAG}
-    image: lightshield/match_details:${TAG}
+    image: docker.yil.ad.ebg.pw/lightshield-yil/match_details:${TAG}
     environment:
       - SERVER=${SERVER}
       - QUEUES=420
