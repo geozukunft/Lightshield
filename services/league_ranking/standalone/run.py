@@ -3,13 +3,13 @@ import asyncio
 import logging
 import os
 import signal
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import aiohttp
-import asyncpg
-from exceptions import RatelimitException, NotFoundException, Non200Exception
-from rank_manager import RankManager
 from connection_manager.persistent import PostgresConnector
+from exceptions import RatelimitException, NotFoundException, Non200Exception
+
+from rank_manager import RankManager
 
 # uvloop.install()
 
@@ -182,9 +182,10 @@ class Service:  # pylint: disable=R0902
             self.logging.info("Error %s", err)
             raise Non200Exception()
         if response.status in [429, 430]:
-            if "Retry-After" in response.headers:
-                delay = max(1, int(response.headers["Retry-After"]))
-                self.retry_after = datetime.now() + timedelta(seconds=delay)
+            if "Retry-At" in response.headers:
+                self.retry_after = datetime.strptime(
+                    response.headers["Retry-At"], "%Y-%m-%d %H:%M:%S.%f"
+                )
             raise RatelimitException()
         if response.status == 404:
             raise NotFoundException()
